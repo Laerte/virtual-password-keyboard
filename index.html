@@ -7,7 +7,9 @@
   </head>
   <body>
     <label for="password">Password:</label>
-    <input type="password" name="password">
+    <input type="password" name="password" id="password" disabled>
+    <input type="button" value="Verify" onclick="verifyPassword();">
+    <input type="hidden" id="testPassword" value="426849">
     <div id="keyboard" class="keyboard">
     </div>
     <script type="text/javascript" src="virtual-password-keyboard.js"></script>
