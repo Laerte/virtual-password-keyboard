@@ -1,4 +1,4 @@
-function generateDigitsGroups(){
+function generateDigitsGroups() {
   let digitGroups = {};
 
   for (var i = 0; i < 5; i++) {
@@ -63,6 +63,29 @@ function createKeyboardKeys() {
   let clearContent = document.createTextNode("Clear");
   clearElement.appendChild(clearContent);
   keyboardElement.appendChild(clearElement);
+}
+
+function verifyPassword() {
+    let testPassword = document.getElementById("testPassword").value;
+
+    let sequencePassword = [];
+
+    testPassword.split("").forEach(
+        (n) => {
+            sequencePassword.push(...Object.keys(digitGroups).reduce(function(sequencePassword, groupKey) {
+                if (digitGroups[groupKey].indexOf(+n) != -1) {
+                    sequencePassword.push(groupKey);
+                }
+                return sequencePassword;
+            }, []));
+        }
+    );
+
+    if (JSON.stringify(sequencePassword) == JSON.stringify(currentPassword)) {
+        alert("It's a match!");
+    } else {
+        alert("Password invalid.")
+    }
 }
 
 createKeyboardKeys();
