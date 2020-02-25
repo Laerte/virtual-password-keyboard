@@ -84,5 +84,3 @@ function verifyPassword() {
         alert("Invalid password.")
     }
 }
-
-createKeyboardKeys();
