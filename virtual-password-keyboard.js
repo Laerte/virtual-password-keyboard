@@ -1,6 +1,4 @@
-function createKeyboardKeys(){
-  let keyboardElement = document.getElementById('keyboard');
-
+function generateDigitsGroups(){
   let digitGroups = {};
 
   for (var i = 0; i < 5; i++) {
@@ -20,6 +18,25 @@ function createKeyboardKeys(){
 
       digitGroups[i].push(randomNumber);
     }
+  }
+
+  return digitGroups;
+}
+
+function createKeyboardKeys(){
+  let digitGroups = generateDigitsGroups();
+
+  let keyboardElement = document.getElementById('keyboard');
+
+  for (var i = 0; i < 5; i++) {
+    digits = digitGroups[i];
+
+    let digitsElement = document.createElement("div");
+    digitsElement.className = "virtual-keyboard-key";
+    let digitsContent = document.createTextNode(digits.join(" or "));
+    digitsElement.appendChild(digitsContent);
+
+    keyboardElement.appendChild(digitsElement);
   }
 }
 
