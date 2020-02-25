@@ -73,7 +73,7 @@ function verifyPassword() {
     testPasswordSplited.forEach(number => {
       Object.keys(digitGroups).forEach(groupKey => {
         if ( digitGroups[groupKey].indexOf(+number) != -1 ) {
-          sequencePassword2.push(groupKey);
+          sequencePassword.push(groupKey);
         }
       })
     });
