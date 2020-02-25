@@ -78,7 +78,7 @@ function verifyPassword() {
       })
     });
 
-    if (JSON.stringify(sequencePassword) == JSON.stringify(currentPassword)) {
+    if (JSON.stringify(sequencePassword) === JSON.stringify(currentPassword)) {
         alert("It's a match!");
     } else {
         alert("Invalid password.")
