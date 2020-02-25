@@ -23,21 +23,46 @@ function generateDigitsGroups(){
   return digitGroups;
 }
 
-function createKeyboardKeys(){
-  let digitGroups = generateDigitsGroups();
+function createKeyboardKeys() {
+  digitGroups = generateDigitsGroups();
+  currentPassword = [];
 
   let keyboardElement = document.getElementById('keyboard');
 
   for (var i = 0; i < 5; i++) {
-    digits = digitGroups[i];
+    let digits = digitGroups[i];
 
     let digitsElement = document.createElement("div");
     digitsElement.className = "virtual-keyboard-key";
+    digitsElement.dataset.groupKey = i;
     let digitsContent = document.createTextNode(digits.join(" or "));
-    digitsElement.appendChild(digitsContent);
 
+    digitsElement.onclick = function() {
+      let groupKey = this.dataset.groupKey;
+      let passwordInput = document.getElementById("password");
+      passwordInput.value += groupKey;
+
+      currentPassword.push(groupKey);
+    };
+
+    digitsElement.appendChild(digitsContent);
     keyboardElement.appendChild(digitsElement);
   }
+
+  let clearElement = document.createElement("div");
+  clearElement.className = "virtual-keyboard-key";
+  clearElement.onclick = () => {
+    let passwordInput = document.getElementById("password");
+    let passwordValue = passwordInput.value;
+
+    if (passwordValue != ""){
+      passwordInput.value = passwordValue.substr(0, passwordValue.length -1);
+      currentPassword.pop();
+    }
+  }
+  let clearContent = document.createTextNode("Clear");
+  clearElement.appendChild(clearContent);
+  keyboardElement.appendChild(clearElement);
 }
 
 createKeyboardKeys();
