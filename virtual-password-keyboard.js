@@ -67,19 +67,16 @@ function createKeyboardKeys() {
 
 function verifyPassword() {
     let testPassword = document.getElementById("testPassword").value;
-
     let sequencePassword = [];
+    let testPasswordSplited = testPassword.split("");
 
-    testPassword.split("").forEach(
-        (n) => {
-            sequencePassword.push(...Object.keys(digitGroups).reduce(function(sequencePassword, groupKey) {
-                if (digitGroups[groupKey].indexOf(+n) != -1) {
-                    sequencePassword.push(groupKey);
-                }
-                return sequencePassword;
-            }, []));
+    testPasswordSplited.forEach(number => {
+      Object.keys(digitGroups).forEach(groupKey => {
+        if ( digitGroups[groupKey].indexOf(+number) != -1 ) {
+          sequencePassword2.push(groupKey);
         }
-    );
+      })
+    });
 
     if (JSON.stringify(sequencePassword) == JSON.stringify(currentPassword)) {
         alert("It's a match!");
