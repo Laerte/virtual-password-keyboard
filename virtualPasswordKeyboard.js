@@ -1,9 +1,11 @@
+const PASSWORD_EXAMPLE = '426849';
+
 class VirtualPasswordKeyboard extends HTMLElement {
     constructor(){
         super();
         this.className = 'keyboard';
         this.currentPassword = [];
-        this.digitGroups = generateDigitsGroups();
+        this.digitGroups = this.generateDigitsGroups();
 
         for (var i = 0; i < 5; i++) {
             let digits = this.digitGroups[i];
@@ -63,6 +65,30 @@ class VirtualPasswordKeyboard extends HTMLElement {
         }
 
         return digitGroups;
+    }
+
+    verifyPassword() {
+        let sequencePassword = [];
+        let examplePasswordSplited = PASSWORD_EXAMPLE.split("");
+    
+        examplePasswordSplited.forEach(number => {
+          Object.keys(this.digitGroups).forEach(groupKey => {
+            if ( this.digitGroups[groupKey].indexOf(+number) != -1 ) {
+              sequencePassword.push(groupKey);
+            }
+          })
+        });
+    
+        if (JSON.stringify(sequencePassword) === JSON.stringify(this.currentPassword)) {
+            alert("It's a match!");
+        } else {
+            alert("Invalid password.")
+        }
+    }
+
+    connectedCallback() {
+        let verifyPasswordButton = document.getElementById("verifyPassword");
+        verifyPasswordButton.onclick = this.verifyPassword.bind(this);
     }
 }
 
