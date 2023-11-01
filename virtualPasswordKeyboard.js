@@ -64,13 +64,15 @@ class VirtualPasswordKeyboard extends HTMLElement {
             }
         }
 
+        console.log(`Digit Groups: ${JSON.stringify(digitGroups)}`);
+
         return digitGroups;
     }
 
     verifyPassword() {
         let sequencePassword = [];
         let examplePasswordSplited = PASSWORD_EXAMPLE.split("");
-    
+
         examplePasswordSplited.forEach(number => {
           Object.keys(this.digitGroups).forEach(groupKey => {
             if ( this.digitGroups[groupKey].indexOf(+number) != -1 ) {
@@ -78,7 +80,7 @@ class VirtualPasswordKeyboard extends HTMLElement {
             }
           })
         });
-    
+
         if (JSON.stringify(sequencePassword) === JSON.stringify(this.currentPassword)) {
             alert("It's a match!");
         } else {
